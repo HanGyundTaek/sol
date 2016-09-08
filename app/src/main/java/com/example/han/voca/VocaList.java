@@ -28,10 +28,11 @@ public class VocaList extends AppCompatActivity {
 
 
 
-    private ListView list;
+    private ListView list;                                  // 리스트뷰(단어리스트가 들어갈...)
     dbHelper helper;
     SQLiteDatabase db;
-    ArrayList<VocaDTO> dataList = new ArrayList<>();
+    ArrayList<VocaDTO> dataList = new ArrayList<>();        // ArrayList (단어리스트를 담기 위해...)
+
 
 
     @Override
@@ -41,47 +42,50 @@ public class VocaList extends AppCompatActivity {
 
 
 
+        // db에 있는 단어들을 'select ' 문을 통해 'ListView'에 나열
         list = (ListView) findViewById(R.id.list);
-
-
-
-        // db를  Listview에 출력하는 코드
         helper = new dbHelper(this);
         db = helper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from contacts", null);
 
-        //데이터 얻기??
+
+
+        // DTO객체에 값을 담기?
         while(cursor.moveToNext()){
-            VocaDTO dto = new VocaDTO();
-            dto.setVoca(cursor.getString(1));   // 0번컬럼은 시퀸스넘버, 1번 컬럼은 name, 2번 컬럼은 date
-            dto.setDate(cursor.getString(2));   // 0번컬럼은 시퀸스넘버, 1번 컬럼은 name, 2번 컬럼은 date
-            Log.i("test", "onCreate: "+dto.getVoca());
-            dataList.add(dto);                  // dto를 'datalist'에 추가
+            VocaDTO dto = new VocaDTO();        // DTO객체 생성
+            dto.setVoca(cursor.getString(1));   // 1번 컬럼 'name'을 DTO에 담기
+            dto.setDate(cursor.getString(2));   // 2번 컬럼 'date'를 DTO에 담기
+                                                // 0번컬럼은 시퀸스넘버, 1번 컬럼은 name, 2번 컬럼은 date
+            dataList.add(dto);                  // dto를 datalist에... ( datalist는 ArrayList<VocaDTO>의 객체)
         }
         startManagingCursor(cursor);
 
 
 
-        // 컬럼 name과 date를 ...... , 자료를 adapter에 담음.
+        // 컬럼 NAME(단어)과 DATE(날짜)를  adapter에 담음.
         String[] from = {"name", "date"};
         int[] to = {android.R.id.text1, android.R.id.text2};
         SimpleCursorAdapter adapter =
-                new SimpleCursorAdapter(this    , android.R.layout.simple_list_item_2, cursor, from, to);
+                new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2,
+                                        cursor, from, to);
 
-        //담았던 adapter를 list에 출력
+        //담았던 adapter를 listview에 출력
         list.setAdapter(adapter);
 
 
         //리스트를 클릭하면 발생하는 이벤트
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                                    //부모 어뎁터,     클릭된 뷰,     뷰의 포지션번호,   뷰의 아이디.
+            public void onItemClick(AdapterView<?> adapterView, View view, int position,    long l) {
+                                    //  'AdapterView<?> adapterView'  부모 어뎁터
+                                    //  'View view'                   클릭된 뷰
+                                    //  'int position'                뷰의 포지션번호
+                                    //  'long l'                      뷰의 아이디.
 
-                //   [나중에 지울것] db에 값을 담은 Toast를 출력
-                Toast.makeText(VocaList.this, dataList.get(position).getVoca(), Toast.LENGTH_SHORT).show();
 
 
+                //  db에 값을 담은 Toast를 출력 (지워도 된다.)
+                Toast.makeText(VocaList.this, dataList.get(position).getVoca()+"가 선택되었습니다.", Toast.LENGTH_SHORT).show();
 
 
                 //단어를 누르면   '리스트 ->  뜻'   이동하는 인텐트
@@ -106,8 +110,8 @@ public class VocaList extends AppCompatActivity {
 class dbHelper extends SQLiteOpenHelper {
 
 
-    private static final String DATABASE_NAME = "mydb_3.db";
-    private static final int DATABASE_VERSION = 2;
+    public static final String DATABASE_NAME = "mydb_4.db";
+    public static final int DATABASE_VERSION = 2;
 
     public dbHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -119,10 +123,13 @@ class dbHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE contacts ( _id integer primary key autoincrement, "
                 + "name VOCA, date DATE);");
 
-        for (int i = 0; i<10; i++){
-            db.execSQL("insert into contacts values(null, "+"'단어"+i
-                    +"'"+", '날짜"+i+"');");
-        }
+        db.execSQL("insert into contacts values(null,'time','날짜1');");
+        db.execSQL("insert into contacts values(null,'picture','날짜2');");
+        db.execSQL("insert into contacts values(null,'beautiful','날짜3');");
+        db.execSQL("insert into contacts values(null,'interest','날짜4');");
+        db.execSQL("insert into contacts values(null,'give','날짜5');");
+        db.execSQL("insert into contacts values(null,'history','날짜6');");
+        db.execSQL("insert into contacts values(null,'symbol','날짜7');");
 
     }
 
