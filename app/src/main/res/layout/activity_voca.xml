@@ -10,67 +10,72 @@
 
 
     <TextView
+        android:paddingRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="나눔고딕"
-        android:background="#dddddd"
+        android:gravity="center"
+        android:text="DICTIONARY"
+        android:textSize="30dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#3366aa"
+
         />
+
+
     <LinearLayout
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_weight="0.1"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RatingBar
-
-            android:id="@+id/ratingBar"
-            android:numStars="3"
-            style="?android:attr/ratingBarStyleSmall"
-            android:stepSize="1"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/voca1"
+            android:layout_width="10dp"
             android:layout_height="match_parent"
-
-
+            android:paddingLeft="20dp"
+            android:layout_weight="1"
+            android:text="단어"
+            android:gravity="center|left"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="저장빈도"
-            android:layout_weight="1"
-            android:background="#aaddbb"
+            android:layout_weight="2"
+            android:text="★★★"
+            android:gravity="center|left"
             />
+
+
+
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_weight="2"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_weight="0.5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp">
 
-        >
-        <TextView
-            android:id="@+id/voca1"
-            android:layout_width="0dp"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Image"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:fillViewport="true"
+
+            >
+
+        <ListView
+            android:divider="#ffffff"
+            android:dividerHeight="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:text="[|ɪmɪdƷ]"
-            android:layout_weight="2"
-
-            android:id="@+id/go2"
-            android:gravity="center|left"
+            android:id="@+id/diction"
+            android:gravity="top|left"
             />
-
-     </LinearLayout>
-
-
+        </ScrollView>
+    </LinearLayout>
 
 
 
@@ -82,48 +87,20 @@
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
+
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
 
             >
-            <TextView
+            <ListView
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/content"
 
-                android:text="1.(개인・기관・상품 등이 대중에게 주는) 이미지[인상]
-
-His public image is very different from the real person.
-그의 대중적 이미지는 실제 인물과 아주 다르다.
-The advertisements are intended to improve the company's image.
-그 광고는 그 회사의 이미지를 개선하기 위해 만들어진 것이다.
-Image is very important in the music world.
-음악계에서는 이미지가 대단히 중요하다.
-stereotyped images of women in children's books
-아동 도서에 나오는 정형화된 여성상
-
-2.(마음속에 떠오르는) 영상[상/심상]
-images of the past
-과거에 대한 영상들
-I had a mental image of what she would look like.
-나는 그녀의 모습에 대해 마음속으로 그리는 상이 있었다.
-
-3.(격식) (…의 모습을 담은) 그림[조각/상]
-Images of deer and hunters decorate the cave walls.
-사슴과 사냥꾼들을 그린 그림이 그 동굴 벽을 꾸미고 있다.
-a wooden image of the Hindu god Ganesh
-힌두교의 신인 가네샤 목상
-            2.(마음속에 떠오르는) 영상[상/심상]
-            images of the past
-            과거에 대한 영상들
-            I had a mental image of what she would look like.
-            나는 그녀의 모습에 대해 마음속으로 그리는 상이 있었다.
-
-            3.(격식) (…의 모습을 담은) 그림[조각/상]
-            Images of deer and hunters decorate the cave walls.
-            사슴과 사냥꾼들을 그린 그림이 그 동굴 벽을 꾸미고 있다.
-            a wooden image of the Hindu god Ganesh
-            힌두교의 신인 가네샤 목상"
                 />
 
             </ScrollView>
@@ -135,7 +112,9 @@ a wooden image of the Hindu god Ganesh
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
+        android:background="#efefef"
 
+        android:outlineProvider="bounds"
         >
         <TextView
 
@@ -143,26 +122,37 @@ a wooden image of the Hindu god Ganesh
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#eaeaea"
+
             android:text="단어장에추가"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#3366aa"
 
             />
+
         <TextView
-            android:id="@+id/vocaList"
-            android:background="#eaeaea"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:text="기사보기"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#3366aa"
 
+            />
+
+        <TextView
+            android:id="@+id/vocaList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="단어리스트"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#3366aa"
 
             />
+
 
 
 
